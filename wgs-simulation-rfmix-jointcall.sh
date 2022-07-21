@@ -1,3 +1,18 @@
+### RFMIX
+# 31 NAT (other half of Surui, Karitiana, Maya, Pima) = RFMIX
+egrep "Surui|Karitiana|Maya|Pima|Colombian" BHRC_KIDS > NAT_HGDP_RFMIX
+nano NAT_HGDP_RFMIX # edited manually to be the counterpart of NAT_HGDP_SIMU
+
+mv NAT_HGDP_RFMIX temp_NAT_HGDP_RFMIX
+awk '{print $2}' tepmp_NAT_HGDP_RFMIX > NAT_HGDP_RFMIX
+
+rm temp_NAT_HGDP_RFMIX
+
+# 77 IBS = RFMIX . using the same indivs as used for the prev simulations = unrelated samples.
+grep IBS ./1000GP_Phase3/1000GP_Phase3.sample | awk '{print $1}' | tail -n 77 > IBS_1KG_RFMIX
+
+# 77 YRI = RFMIX. using the same indivs as used for the prev simulations = unrelated samples.
+grep YRI ./1000GP_Phase3/1000GP_Phase3.sample | awk '{print $1}' | tail -n 77 > YRI_1KG_RFMIX
 
 ##################
 # RFmix - preparo dos arquivos
