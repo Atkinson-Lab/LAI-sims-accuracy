@@ -316,6 +316,44 @@ d[1] <- "vazio"
 e <- list()
 e[1] <- "vazio"
 
+for (k in 2:22){
+    tabela_concat[[k]] <- as.data.frame(cbind(simureal2[[k]]$V1, simureal2[[k]]$V2))
+    for (i in 3:dim(simureal2[[k]])[2]){
+        tabela_concat[[k]][,i] <- paste(simureal2[[k]][,i],ldf[[k]][,i], sep=" ")
+    }
+tabela_concat[[k]]$WC_erroAN <- rowSums(tabela_concat[[k]][,3:62] == "2 0")
+tabela_concat[[k]]$WC_erroNA <- rowSums(tabela_concat[[k]][,3:62] == "0 2")
+tabela_concat[[k]]$WC_erroEN <- rowSums(tabela_concat[[k]][,3:62] == "3 0")
+tabela_concat[[k]]$WC_erroNE <- rowSums(tabela_concat[[k]][,3:62] == "0 3")
+tabela_concat[[k]]$WC_erroAE <- rowSums(tabela_concat[[k]][,3:62] == "2 3")
+tabela_concat[[k]]$WC_erroEA <- rowSums(tabela_concat[[k]][,3:62] == "3 2")
+
+an[[k]] <- tabela_concat[,c("V2", "WC_erroAN")]
+na[[k]] <- tabela_concat[,c("V2", "WC_erroNA")]
+en[[k]] <- tabela_concat[,c("V2", "WC_erroEN")]
+ne[[k]] <- tabela_concat[,c("V2", "WC_erroNE")]
+ae[[k]] <- tabela_concat[,c("V2", "WC_erroAE")]
+ea[[k]] <- tabela_concat[,c("V2", "WC_erroEA")]
+
+an[[k]]$grupo <- "AN"
+colnames(an[[k]])[2] <- "erro"
+na[[k]]$grupo <- "NA"
+colnames(na[[k]])[2] <- "erro"
+
+en[[k]]$grupo <- "EN"
+colnames(en[[k]])[2] <- "erro"
+ne[[k]]$grupo <- "NE"
+colnames(ne[[k]])[2] <- "erro"
+
+ae[[k]]$grupo <- "AE"
+colnames(ae[[k]])[2] <- "erro"
+ea[[k]]$grupo <- "EA"
+colnames(ea[[k]])[2] <- "erro"
+
+d[[k]] <- rbind(an[[k]], na[[k]], en[[k]], ne[[k]], ae[[k]], ea[[k]])
+e[[k]] <- d[[k]][order(d[[k]]$V2),]
+
+## all chromosomes
 
   tabela_concat <- as.data.frame(cbind(simureal2_global$V1, simureal2_global$V2))
   for (i in 3:dim(simureal2_global)[2]){
