@@ -205,26 +205,3 @@ for i in {1..22}; do sed 's/3/2/g' Brasa_1_Lat2.1_${i} > Brasa_1_Lat2.2_${i}; do
 for i in {1..22}; do awk '{print $1, $3}' Brasa_gen12_RefHGDPNAT_1kgIBS_1kgYRI_chr${i}.map | sed 's/:.*//g' > Brasa_1_mappin_${i}_Lat; done
 for i in {1..22}; do paste Brasa_1_mappin_${i}_Lat Brasa_1_Lat2.2_${i} | sed 's/\t/ /g' > Brasa_1_Lat3_${i}; done
 
-
-# collapse RFMix into bed files. from #running from /storage/atkinson/home/u242335/lai/simu-jointcall/gen12
-
-python ../../ancestry_pipeline-master/collapse_ancestry.py \
---rfmix ./Brasa_gen12_RefHGDPNAT_1kgIBS_1kgYRI_chr1.rfmix.2.Viterbi.txt \
---snp_locations ./Brasa_gen12_RefHGDPNAT_1kgIBS_1kgYRI_chr1.snp_locations \
---fbk ./Brasa_gen12_RefHGDPNAT_1kgIBS_1kgYRI_chr1.rfmix.2.ForwardBackward.txt \
---fbk_threshold 0.9 \
---ind Brasa2 \
---ind_info ./Brasa_gen12_RefHGDPNAT_1kgIBS_1kgYRI.sample \
---pop_labels NAT,EUR,AFR \
---out ./Brasa2
-
-# plot karyograms
-# get centromere files # ran local. 
-#modified name of centromere_cm_hg38.bed to centromeres_hg19.bed file on /atkinsonlab/painted-karyograms/gen12-gsa-joint for it to work
-# script tem que ser rodado com python 2
-
-IND='Brasa2'; python2 ../ancestry_pipeline-master/plot_karyogram.py \
---bed_a ${IND}_A.bed \
---bed_b ${IND}_B.bed \
---ind ${IND} \
---out ${IND}.png
