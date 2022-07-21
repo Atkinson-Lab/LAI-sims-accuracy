@@ -1,9 +1,11 @@
 # LAI-sims-accuracy
 *Code for determining local ancestry inference accuracy*
 
-simulation.sh - code for simulating admixed individuals with admix-simu https://github.com/williamslab/admix-simu
+simulation.sh - general code for simulating admixed individuals with admix-simu https://github.com/williamslab/admix-simu
 
-run_rfmix.sh - code used for RFMix v1 runs of simulations.
+phasing-jointcall.sh - Filtering sites and phasing of the 1kg-hgdp joint call dataset.
+
+wgs-simulation-rfmix-jointcall.sh - code used for generating all simulated models and RFMix v1 runs, and preparing files for the accuracy calculation.
 
 accuracy.R - code for calculating true positive rates of RFMix calls of simulations, getting counts of miscalls per error mode between ancestry groups, and getting the positions with highest number of miscalls.
 
