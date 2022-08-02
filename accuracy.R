@@ -98,6 +98,7 @@ for (k in 1:22){
 }
 
 rm(ldf)
+
 #GRAFICOS
 TabBrasa <- list()
 TabBrasa[1] <- "vazio"
@@ -116,8 +117,6 @@ for (k in 1:22){
 
 anc = c("AFR", "EUR", "NAT")
 vivid = c("#5D69B1", "#FCA315", "#1BB6AF")
-juice = c("#B25D91", "#FCA315", "#1BB6AF")
-okabe = c("#CC79A7", "#E69F00", "#009E73")
 
 library(ggthemr)
 ggthemr('fresh', layout = "clean")
@@ -136,12 +135,6 @@ ggplot(TabBrasa[[i]], aes(x=Ref, fill=Variable, y=Accuracy)) +
   theme(axis.text = element_text(size = 12), axis.title = element_text(size = 12), 
         title = element_text(size=12), legend.text=element_text(size=12)) +
   stat_summary(aes(label = , 1))
-
-
-#Inspect if colorblind friendly
-# https://www.color-blindness.com/coblis-color-blindness-simulator/
-
-# if not, use okabe ito pallette
 
 ### GETTING OUTLIER NAMES
 library(car)
@@ -189,23 +182,6 @@ ggplot(dat[[i]], aes(x=Variable, fill=Variable, y=Accuracy)) +
 #add + geom_quasirandom() to ggplot
 
 ####### GLOBAL ACC ######
-
-simureal2_global <- as.data.frame(rbind(simureal2[[1]],simureal2[[2]],simureal2[[3]],
-                                        simureal2[[4]],simureal2[[5]],simureal2[[6]],
-                                        simureal2[[7]],simureal2[[8]],simureal2[[9]],
-                                        simureal2[[10]],simureal2[[11]],simureal2[[12]],
-                                        simureal2[[13]],simureal2[[14]],simureal2[[15]],
-                                        simureal2[[16]],simureal2[[17]],simureal2[[18]],
-                                        simureal2[[19]],simureal2[[20]],simureal2[[21]],
-                                        simureal2[[22]]))
-rm(simureal2)
-
-rfmix_global <- as.data.frame(rbind(ldf[[1]],ldf[[2]],ldf[[3]],ldf[[4]],ldf[[5]],
-                                    ldf[[6]],ldf[[7]],ldf[[8]],ldf[[9]],ldf[[10]],
-                                    ldf[[11]],ldf[[12]],ldf[[13]],ldf[[14]],ldf[[15]],
-                                    ldf[[16]],ldf[[17]],ldf[[18]],ldf[[19]],ldf[[20]],
-                                    ldf[[21]],ldf[[22]]))
-rm(ldf)
 
 SimuReal_Brasa <- read.table("SimuReal_Brasa_genome.AncCalls", header = F)
 for (i in c(3:62)){
